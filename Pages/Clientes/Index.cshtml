@@ -1,0 +1,29 @@
+@page
+@model BancoApp.Pages.Clientes.IndexModel
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+
+<h2>Lista de Clientes</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Saldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model.Clientes)
+        {
+            <tr>
+                <td>@cliente.Id</td>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Correo</td>
+                <td>@cliente.Saldo</td>
+            </tr>
+        }
+    </tbody>
+</table>
