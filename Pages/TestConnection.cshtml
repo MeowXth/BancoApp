@@ -1,0 +1,12 @@
+@page
+@model TestConnectionModel
+<h2>Prueba de Conexión a la Base de Datos</h2>
+
+@if (Model.IsConnected)
+{
+    <p style="color:green;">¡Conexión exitosa!</p>
+}
+else
+{
+    <p style="color:red;">Error al conectar con la base de datos.</p>
+}
