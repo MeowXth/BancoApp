@@ -17,5 +17,21 @@ namespace BancoApp.Services
         {
             return _clienteRepository.ObtenerClientes();
         }
+        public void AgregarCliente(Cliente cliente)
+        {
+            _clienteRepository.AgregarCliente(cliente);
+        }
+        public Cliente? ObtenerClientePorId(int id)
+        {
+            return _clienteRepository.ObtenerClientePorId(id);
+        }
+        public void ActualizarCliente(Cliente cliente)
+        {
+            _clienteRepository.ActualizarCliente(cliente);
+        }
+        public void EliminarCliente(int id)
+        {
+            _clienteRepository.EliminarCliente(id);
+        }
     }
 }

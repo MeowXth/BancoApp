@@ -16,14 +16,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var cliente in Model.Clientes)
+        @foreach(var cliente in Model.Clientes)
         {
             <tr>
                 <td>@cliente.Id</td>
                 <td>@cliente.Nombre</td>
                 <td>@cliente.Correo</td>
                 <td>@cliente.Saldo</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@cliente.Id">Editar</a> 
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a asp-page="Create">Agregar Nuevo Cliente</a>
+

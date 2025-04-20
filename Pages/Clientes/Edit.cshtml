@@ -1,0 +1,24 @@
+@page
+@model BancoApp.Pages.Clientes.EditModel
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<h2>Editar Cliente</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Cliente.Id" />
+
+    <label>Nombre:</label>
+    <input type="text" asp-for="Cliente.Nombre" required />
+
+    <label>Correo:</label>
+    <input type="email" asp-for="Cliente.Correo" required />
+
+    <label>Saldo:</label>
+    <input type="number" asp-for="Cliente.Saldo" required />
+
+    <button type="submit">Actualizar</button>
+</form>
+
+<a asp-page="Index">Volver</a>

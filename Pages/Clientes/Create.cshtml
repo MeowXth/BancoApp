@@ -1,0 +1,22 @@
+@page
+@model BancoApp.Pages.Clientes.CreateModel
+@{
+    ViewData["Title"] = "Agregar Cliente";
+}
+
+<h2>Agregar Cliente</h2>
+
+<form method="post">
+    <label>Nombre:</label>
+    <input type="text" asp-for="Cliente.Nombre" required />
+
+    <label>Correo:</label>
+    <input type="email" asp-for="Cliente.Correo" required />
+
+    <label>Saldo:</label>
+    <input type="number" asp-for="Cliente.Saldo" required />
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a asp-page="Index">Volver</a>
