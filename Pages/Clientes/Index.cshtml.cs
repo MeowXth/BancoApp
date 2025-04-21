@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 using BancoApp.Services;
 using BancoApp.Models;
-using System.Collections.Generic;
 
 namespace BancoApp.Pages.Clientes
 {
     public class IndexModel : PageModel
     {
         private readonly ClienteService _clienteService;
-
         public List<Cliente> Clientes { get; set; } = new();
 
         public IndexModel(ClienteService clienteService)
@@ -20,6 +19,13 @@ namespace BancoApp.Pages.Clientes
         {
             Clientes = _clienteService.ObtenerClientes();
         }
+
+        public IActionResult OnPostEliminar(int id)
+        {
+            _clienteService.EliminarCliente(id);
+            return RedirectToPage();
+        }
     }
 }
+
 

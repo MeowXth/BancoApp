@@ -8,15 +8,19 @@
 
 <form method="post">
     <label>Nombre:</label>
-    <input type="text" asp-for="Cliente.Nombre" required />
+    <input type="text" asp-for="Cliente.Nombre" />
+    <span asp-validation-for="Cliente.Nombre" class="text-danger"></span>
 
     <label>Correo:</label>
-    <input type="email" asp-for="Cliente.Correo" required />
+    <input type="email" asp-for="Cliente.Correo" />
+    <span asp-validation-for="Cliente.Correo" class="text-danger"></span>
 
     <label>Saldo:</label>
-    <input type="number" asp-for="Cliente.Saldo" required />
+    <input type="number" asp-for="Cliente.Saldo" step="0.01" />
+    <span asp-validation-for="Cliente.Saldo" class="text-danger"></span>
 
     <button type="submit">Guardar</button>
 </form>
 
 <a asp-page="Index">Volver</a>
+

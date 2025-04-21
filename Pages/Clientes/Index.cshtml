@@ -16,18 +16,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var cliente in Model.Clientes)
-        {
-            <tr>
-                <td>@cliente.Id</td>
-                <td>@cliente.Nombre</td>
-                <td>@cliente.Correo</td>
-                <td>@cliente.Saldo</td>
-                <td>
-                    <a asp-page="Edit" asp-route-id="@cliente.Id">Editar</a> 
-                </td>
-            </tr>
-        }
+@foreach (var cliente in Model.Clientes)
+{
+    <tr>
+        <td>@cliente.Nombre</td>
+        <td>@cliente.Correo</td>
+        <td>@cliente.Saldo</td>
+        <td>
+            <a asp-page="Edit" asp-route-id="@cliente.Id">Editar</a>
+            <form method="post" asp-page-handler="Eliminar" asp-route-id="@cliente.Id" style="display:inline;">
+                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">
+                    Eliminar
+                </button>
+            </form>
+        </td>
+    </tr>
+}
+
     </tbody>
 </table>
 
