@@ -20,10 +20,25 @@ namespace BancoApp.Pages.Clientes
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid) return Page();
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Por favor, corrige los errores antes de continuar.";
+                return Page();
+            }
 
-            _clienteService.AgregarCliente(Cliente);
-            return RedirectToPage("Index");
+            bool resultado = _clienteService.AgregarCliente(Cliente);
+
+            if (resultado)
+            {
+                TempData["SuccessMessage"] = "Cliente agregado exitosamente.";
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al agregar el cliente. Inténtalo nuevamente.";
+                return Page();
+            }
         }
+
     }
 }

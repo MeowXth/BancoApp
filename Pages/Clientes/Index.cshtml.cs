@@ -22,7 +22,17 @@ namespace BancoApp.Pages.Clientes
 
         public IActionResult OnPostEliminar(int id)
         {
-            _clienteService.EliminarCliente(id);
+            bool resultado = _clienteService.EliminarCliente(id);
+
+            if (resultado)
+            {
+                TempData["SuccessMessage"] = "Cliente eliminado correctamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al eliminar el cliente.";
+            }
+
             return RedirectToPage();
         }
     }

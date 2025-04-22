@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using BancoApp.Data;
 using BancoApp.Models;
+using BancoApp.Data;
 
-namespace BancoApp.Services
+namespace BancoApp.Services 
 {
     public class ClienteService
     {
         private readonly ClienteRepository _clienteRepository;
-
         public ClienteService(ClienteRepository clienteRepository)
         {
             _clienteRepository = clienteRepository;
@@ -17,21 +16,26 @@ namespace BancoApp.Services
         {
             return _clienteRepository.ObtenerClientes();
         }
-        public void AgregarCliente(Cliente cliente)
+
+        public bool AgregarCliente(Cliente cliente)
         {
-            _clienteRepository.AgregarCliente(cliente);
+            return _clienteRepository.AgregarCliente(cliente);
         }
+
         public Cliente? ObtenerClientePorId(int id)
         {
             return _clienteRepository.ObtenerClientePorId(id);
         }
-        public void ActualizarCliente(Cliente cliente)
+
+        public bool ActualizarCliente(Cliente cliente)
         {
-            _clienteRepository.ActualizarCliente(cliente);
+            return _clienteRepository.ActualizarCliente(cliente);
         }
-        public void EliminarCliente(int id)
+
+        public bool EliminarCliente(int id)
         {
-            _clienteRepository.EliminarCliente(id);
+            return _clienteRepository.EliminarCliente(id);
         }
+        
     }
 }

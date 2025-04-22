@@ -42,18 +42,27 @@ namespace BancoApp.Data
             return clientes;
         }
 
-        public void AgregarCliente(Cliente cliente)
+        public bool AgregarCliente(Cliente cliente)
         {
-            using (var connection = _databaseHelper.GetConnection())
+            try
             {
-                connection.Open();
-                using (var command = new SqlCommand("INSERT INTO Clientes (Nombre, Correo, Saldo) VALUES (@Nombre, @Correo, @Saldo)", connection))
+                using (var connection = _databaseHelper.GetConnection())
                 {
-                    command.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    command.Parameters.AddWithValue("@Correo", cliente.Correo);
-                    command.Parameters.AddWithValue("@Saldo", cliente.Saldo);
-                    command.ExecuteNonQuery();
+                    connection.Open();
+                    string query = "INSERT INTO Clientes (Nombre, Correo, Saldo) VALUES (@Nombre, @Correo, @Saldo)";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Nombre", cliente.Nombre);
+                        command.Parameters.AddWithValue("@Correo", cliente.Correo);
+                        command.Parameters.AddWithValue("@Saldo", cliente.Saldo);
+                        int filasAfectadas = command.ExecuteNonQuery();
+                        return filasAfectadas > 0; 
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false; 
             }
         }
 
@@ -84,32 +93,50 @@ namespace BancoApp.Data
             return null;
         }
 
-        public void ActualizarCliente(Cliente cliente)
+        public bool ActualizarCliente(Cliente cliente)
         {
-            using (var connection = _databaseHelper.GetConnection())
+            try
             {
-                connection.Open();
-                using (var command = new SqlCommand("UPDATE Clientes SET Nombre = @Nombre, Correo = @Correo, Saldo = @Saldo WHERE Id = @Id", connection))
+                using (var connection = _databaseHelper.GetConnection())
                 {
-                    command.Parameters.AddWithValue("@Id", cliente.Id);
-                    command.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    command.Parameters.AddWithValue("@Correo", cliente.Correo);
-                    command.Parameters.AddWithValue("@Saldo", cliente.Saldo);
-                    command.ExecuteNonQuery();
+                    connection.Open();
+                    string query = "UPDATE Clientes SET Nombre = @Nombre, Correo = @Correo, Saldo = @Saldo WHERE Id = @Id";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Nombre", cliente.Nombre);
+                        command.Parameters.AddWithValue("@Correo", cliente.Correo);
+                        command.Parameters.AddWithValue("@Saldo", cliente.Saldo);
+                        command.Parameters.AddWithValue("@Id", cliente.Id);
+                        int filasAfectadas = command.ExecuteNonQuery();
+                        return filasAfectadas > 0;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void EliminarCliente(int id)
+        public bool EliminarCliente(int id)
         {
-            using (var connection = _databaseHelper.GetConnection())
+            try
             {
-                connection.Open();
-                using (var command = new SqlCommand("DELETE FROM Clientes WHERE Id = @Id", connection))
+                using (var connection = _databaseHelper.GetConnection())
                 {
-                    command.Parameters.AddWithValue("@Id", id);
-                    command.ExecuteNonQuery();
+                    connection.Open();
+                    string query = "DELETE FROM Clientes WHERE Id = @Id";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", id);
+                        int filasAfectadas = command.ExecuteNonQuery();
+                        return filasAfectadas > 0;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

@@ -26,10 +26,25 @@ namespace BancoApp.Pages.Clientes
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid) return Page();
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Por favor, corrige los errores antes de continuar.";
+                return Page();
+            }
 
-            _clienteService.ActualizarCliente(Cliente);
-            return RedirectToPage("Index");
+            bool resultado = _clienteService.ActualizarCliente(Cliente);
+
+            if (resultado)
+            {
+                TempData["SuccessMessage"] = "Cliente actualizado correctamente.";
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al actualizar el cliente.";
+                return Page();
+            }
         }
+
     }
 }
