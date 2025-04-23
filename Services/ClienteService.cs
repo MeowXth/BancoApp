@@ -36,6 +36,10 @@ namespace BancoApp.Services
         {
             return _clienteRepository.EliminarCliente(id);
         }
+        public List<Cliente> BuscarClientes(string criterio)
+        {
+            return _clienteRepository.BuscarClientes(criterio);
+        }
         
     }
 }

@@ -5,6 +5,10 @@
 }
 
 <h2>Lista de Clientes</h2>
+<form method="get">
+    <input type="text" name="CriterioBusqueda" value="@Model.CriterioBusqueda" placeholder="Buscar clientes..." />
+    <button type="submit">Buscar</button>
+</form>
 
 <table border="1">
     <thead>

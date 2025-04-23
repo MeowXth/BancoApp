@@ -139,5 +139,38 @@ namespace BancoApp.Data
                 return false;
             }
         }
+        public List<Cliente> BuscarClientes(string criterio) {
+            List<Cliente> clientes = new List<Cliente>();
+            try
+            {
+                using(var connection = _databaseHelper.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT * FROM Clientes WHERE Nombre LIKE @Criterio OR Correo LIKE @Criterio";
+                    using(var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Criterio", $"%{criterio}%");
+                        using(var reader = command.ExecuteReader())
+                        {
+                            while(reader.Read())
+                            {
+                                clientes.Add(new Cliente
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Nombre = reader.GetString(1),
+                                    Correo = reader.GetString(2),
+                                    Saldo = reader.GetDecimal(3)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                //En caso de error, retornamos una lista vacía
+            }
+            return clientes;
+        }
     }
 }
